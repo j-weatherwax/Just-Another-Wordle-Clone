@@ -18,7 +18,6 @@ export const GuessGrid = (props) => {
                                                                 shake={props.shake} 
                                                                 active={true} 
                                                                 color={props.tileColors ? props.tileColors[index] : ""} 
-                                                                // flip={props.flip ? flipArray[index] : ""} 
                                                                 flip={props.flip ? flipArray[index] : false} 
                                                                 setShake={props.setShake}/>)}
             {emptyTiles(props)}

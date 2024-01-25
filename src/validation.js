@@ -9,7 +9,7 @@ export function validateGuess(guess, target) {
         }
     })
     guess.split("").forEach((letter, index) => {
-        if (targetCopy.includes(letter)) {
+        if (letter !== target[index] && targetCopy.includes(letter)) {
             stateList[index]="wrong-location"
             targetCopy=targetCopy.replace(letter, "")
         } else if (stateList[index].length === 0) {

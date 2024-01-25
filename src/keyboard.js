@@ -16,11 +16,8 @@ export const Keyboard = (props) => {
         const handleKeyPress = (event) => {
             if (props.gameOver) return
 
-            var key = event.key.toUpperCase();
-            key = key === 'BACKSPACE' ? deleteButton : key
-
             if (props.setActiveTiles) {
-                submit(props, key, deleteButton)
+                submit(props, event.key, deleteButton)
             }
         }
         window.addEventListener('keydown', handleKeyPress)

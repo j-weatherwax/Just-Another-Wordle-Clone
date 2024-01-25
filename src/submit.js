@@ -7,7 +7,10 @@ let dictionary = require('./dictionary.json')
 export function submit(props, key, deleteButton){
     if (props.gameOver) return
     
-    if (key.toUpperCase() === 'ENTER') {
+    key = key === 'Backspace' ? deleteButton : key
+    key = key === deleteButton ? key : key.toUpperCase();
+
+    if (key === 'ENTER') {
         props.setTileColors(
             submitGuess(props.activeTiles, 
                         props.target, 
