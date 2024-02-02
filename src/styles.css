@@ -192,6 +192,18 @@ body {
     align-items: center;
 }
 
+.WinLoseAlert {
+    pointer-events: none;
+    background-color: hsl(204, 7%, 85%);
+    padding: .75em; 
+    margin-bottom: .5em;
+    border-radius: .25em;
+    opacity: 1;
+    animation: fadein;
+    animation-duration: 750ms;
+    animation-delay: 0s, 750ms, 1500ms, 2250ms;
+}
+
 .alert {
     pointer-events: none;
     background-color: hsl(204, 7%, 85%);

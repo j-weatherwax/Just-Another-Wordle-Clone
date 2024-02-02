@@ -11,26 +11,28 @@ export function submit(props, key, deleteButton){
     key = key === deleteButton ? key : key.toUpperCase();
 
     if (key === 'ENTER') {
-        props.setTileColors(
-            submitGuess(props.activeTiles, 
-                        props.target, 
-                        props.priorGuesses,
-                        props.addGuess,
-                        props.setActiveTiles,
-                        props.setTileColors,
-                        props.alerts, 
-                        props.setAlerts, 
-                        props.setShake,
-                        props.setFlip)
-        )
+        submitGuess(props.activeTiles, 
+            props.target, 
+            props.priorGuesses,
+            props.addGuess,
+            props.activeTiles,
+            props.setActiveTiles,
+            props.tileColors,
+            props.setTileColors,
+            props.keyboardColors,
+            props.setKeyboardColors,
+            props.alerts, 
+            props.setAlerts, 
+            props.setShake,
+            props.setFlip)
+
         checkWinLose(props.activeTiles, 
             props.priorGuesses, 
             props.target, 
-            props.alerts, 
-            props.setAlerts, 
             props.gameOver,
             props.setGameOver, 
-            props.setDance)
+            props.setDance,
+            props.setGameState)
     } else {
         props.setActiveTiles(
         updateActiveTiles(key, props.activeTiles, deleteButton)
@@ -51,28 +53,53 @@ function updateActiveTiles(key, activeTiles, deleteButton) {
     return activeTiles.slice(0, 5)
 }
 
-function submitGuess(tiles, target, priorGuesses, addGuess, setActiveTiles, setTileColors, alerts, setAlerts, setShake, setFlip) {
+function submitGuess(tiles, target, priorGuesses, addGuess, activeTiles, setActiveTiles, tileColors, setTileColors, keyboardColors, setKeyboardColors, alerts, setAlerts, setShake, setFlip) {
     
     if (tiles.length === 5) {
         if (!dictionary.includes(tiles.toLowerCase())) {
             alerts.push("Not in word list")
             setAlerts([...alerts])
             setShake(true)
-            return ""
+            return
         }
 
         const submissionTileColors = validateGuess(tiles.toLowerCase(), target)
         setFlip(true)
+        setTileColors(submissionTileColors)
         setTimeout(() => {         
             addGuess([...priorGuesses, {text: tiles.toLowerCase(), colors: submissionTileColors}])
+            KeyColorsFromValidation(keyboardColors, setKeyboardColors, activeTiles, submissionTileColors)
             setActiveTiles("")
-            setTileColors([])
         }, 2000)
-        return submissionTileColors
+        
+    }
+    else{
+        alerts.push("Not enough letters")
+        setAlerts([...alerts])
+        setShake(true)
     }
     
-    alerts.push("Not enough letters")
-    setAlerts([...alerts])
-    setShake(true)
-    return ""
 }
+
+function KeyColorsFromValidation(keyboardColors, setKeyboardColors, guess, tileColors){
+    if(!guess) return
+
+    let colorDict = {...keyboardColors}
+
+    console.log(tileColors)
+
+    const priorityDict = {
+        "wrong": 0,
+        "wrong-location": 1,
+        "correct": 2
+    }
+
+    guess.split("").forEach((letter, index) => {
+        // If the letter has not been guessed proir or is higher in the priorityDict, replace the color in the keyboard
+        if (!colorDict[letter] || priorityDict[colorDict[letter]] < priorityDict[tileColors[index]] )
+            colorDict[letter] = tileColors[index]
+    })
+
+    setKeyboardColors(colorDict)
+}
+    

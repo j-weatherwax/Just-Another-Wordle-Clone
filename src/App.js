@@ -1,12 +1,13 @@
-import logo from './logo.svg';
+import logo from './logo.svg'
 import { useState } from 'react'
 import { GuessGrid } from './guess-grid'
 import { Keyboard } from './keyboard'
-import { AlertList } from './AlertList';
+import { AlertList } from './AlertList'
+import { WinLoseAlert } from './WinLoseAlert'
 import './styles.css';
 
-let targetWords = require('./targetWords.json')
-const target = targetWords[Math.floor(Math.random() * targetWords.length)]
+// let targetWords = require('./targetWords.json')
+const target = "grass"//targetWords[Math.floor(Math.random() * targetWords.length)]
 
 
 function App() {
@@ -19,6 +20,8 @@ function App() {
     const [flip, setFlip] = useState(false)
     const [dance, setDance] = useState(false)
     const [gameOver, setGameOver] = useState(false)
+    const [GameState, setGameState] = useState(null)
+    const [keyboardColors, setKeyboardColors] = useState({})
 
     return (
         <div className="App">
@@ -26,6 +29,7 @@ function App() {
                 <img src={logo} className="App-logo" alt="logo" />
             </header>
             <AlertList alerts={alerts} setAlerts={setAlerts}/>
+            <WinLoseAlert GameState = {GameState}/>
             <GuessGrid activeTiles={activeTiles} 
                     priorGuesses={priorGuesses} 
                     addGuess={addGuess}
@@ -45,6 +49,7 @@ function App() {
                     setActiveTiles={setActiveTiles} 
                     priorGuesses={priorGuesses} 
                     addGuess={addGuess}
+                    tileColors={tileColors}
                     setTileColors={setTileColors}
                     alerts={alerts} 
                     setAlerts={setAlerts}
@@ -53,6 +58,9 @@ function App() {
                     gameOver={gameOver}
                     setGameOver={setGameOver}
                     setDance={setDance}
+                    keyboardColors={keyboardColors}
+                    setKeyboardColors={setKeyboardColors}
+                    setGameState={setGameState}
                     target={target}/>
         </div>
     );
