@@ -6,8 +6,8 @@ import { AlertList } from './AlertList'
 import { WinLoseAlert } from './WinLoseAlert'
 import './styles.css';
 
-// let targetWords = require('./targetWords.json')
-const target = "grass"//targetWords[Math.floor(Math.random() * targetWords.length)]
+let targetWords = require('./targetWords.json')
+const target = targetWords[Math.floor(Math.random() * targetWords.length)]
 
 
 function App() {
