@@ -30,38 +30,40 @@ function App() {
             </header>
             <AlertList alerts={alerts} setAlerts={setAlerts}/>
             <WinLoseAlert GameState = {GameState}/>
-            <GuessGrid activeTiles={activeTiles} 
-                    priorGuesses={priorGuesses} 
-                    addGuess={addGuess}
-                    shake={shake}
-                    setShake={setShake}
-                    dance={dance}
-                    setDance={setDance}
-                    tileColors={tileColors}
-                    flip={flip}
-                    setFlip={setFlip}
-                    alerts={alerts} 
-                    setAlerts={setAlerts}
-                    gameOver={gameOver}
-                    setGameOver={setGameOver}
-                    target={target}/>
-            <Keyboard activeTiles={activeTiles} 
-                    setActiveTiles={setActiveTiles} 
-                    priorGuesses={priorGuesses} 
-                    addGuess={addGuess}
-                    tileColors={tileColors}
-                    setTileColors={setTileColors}
-                    alerts={alerts} 
-                    setAlerts={setAlerts}
-                    setShake={setShake}
-                    setFlip={setFlip}
-                    gameOver={gameOver}
-                    setGameOver={setGameOver}
-                    setDance={setDance}
-                    keyboardColors={keyboardColors}
-                    setKeyboardColors={setKeyboardColors}
-                    setGameState={setGameState}
-                    target={target}/>
+            <div className='content'>
+                <GuessGrid activeTiles={activeTiles} 
+                        priorGuesses={priorGuesses} 
+                        addGuess={addGuess}
+                        shake={shake}
+                        setShake={setShake}
+                        dance={dance}
+                        setDance={setDance}
+                        tileColors={tileColors}
+                        flip={flip}
+                        setFlip={setFlip}
+                        alerts={alerts} 
+                        setAlerts={setAlerts}
+                        gameOver={gameOver}
+                        setGameOver={setGameOver}
+                        target={target}/>
+                <Keyboard activeTiles={activeTiles} 
+                        setActiveTiles={setActiveTiles} 
+                        priorGuesses={priorGuesses} 
+                        addGuess={addGuess}
+                        tileColors={tileColors}
+                        setTileColors={setTileColors}
+                        alerts={alerts} 
+                        setAlerts={setAlerts}
+                        setShake={setShake}
+                        setFlip={setFlip}
+                        gameOver={gameOver}
+                        setGameOver={setGameOver}
+                        setDance={setDance}
+                        keyboardColors={keyboardColors}
+                        setKeyboardColors={setKeyboardColors}
+                        setGameState={setGameState}
+                        target={target}/>
+            </div>
         </div>
     );
 }
