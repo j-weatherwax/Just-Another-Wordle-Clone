@@ -1,4 +1,5 @@
 import { CSSTransition } from 'react-transition-group'
+import { useState, useEffect } from 'react'
 const FLIP_ANIMATION_DURATION = 500
 
 export const GuessGrid = (props) => {
@@ -26,14 +27,26 @@ export const GuessGrid = (props) => {
     )
 } 
 
-const Tile = (props) => <CSSTransition in={props.flip} timeout={((props.index)*FLIP_ANIMATION_DURATION)/2} classNames={`${props.color}`}>
-                            <CSSTransition in={props.shake} timeout={250} classNames={"shake"} onEntered={() => props.setShake(false)}>
-                                <div className={`tile ${props.shake ? "shake" : ""} ${props.active ? "active" : props.color}`}>
-                                    {props.letter}
-                                </div>
-                            </CSSTransition>
-                        </CSSTransition>
-                        
+const Tile = (props) => {
+    const [flipped, setFlipped] = useState(false);
+
+    useEffect(() => {
+        if (props.flip) {
+            setFlipped(true);
+        }
+    }, [props.flip]);
+
+    return (
+        <CSSTransition in={props.flip} timeout={props.index*FLIP_ANIMATION_DURATION/2} classNames={`${props.color}`}>
+            <CSSTransition in={props.shake} timeout={250} classNames={"shake"} onEntered={() => props.setShake(false)}>
+                <CSSTransition in={props.dance} timeout={250} classNames={"dance"} onEntered={() => props.setDance(false)}>
+                <div className={`tile ${props.shake ? "shake" : ""} ${flipped && props.dance ? "dance" : ""} ${props.active ? "active" : props.color}`}>
+                    {props.letter}
+                </div>
+                </CSSTransition>
+            </CSSTransition>
+        </CSSTransition>
+    )}
 
 const renderPrev = (guess, guessIndex) => {
     return guess.text.split('').map((letter, letterIndex) => (<Tile key={letterIndex} letter={letter} shake={false} active={false} color={guess.colors[letterIndex]} setShake={() => {}}/>))

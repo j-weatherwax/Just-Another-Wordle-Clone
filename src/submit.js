@@ -81,7 +81,7 @@ function KeyColorsFromValidation(keyboardColors, setKeyboardColors, guess, tileC
     }
 
     guess.split("").forEach((letter, index) => {
-        // If the letter has not been guessed proir or is higher in the priorityDict, replace the color in the keyboard
+        // If the letter has not been guessed prior or is higher in the priorityDict, replace the color in the keyboard
         if (!colorDict[letter] || priorityDict[colorDict[letter]] < priorityDict[tileColors[index]] )
             colorDict[letter] = tileColors[index]
     })

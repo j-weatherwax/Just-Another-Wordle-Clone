@@ -150,17 +150,17 @@ body {
     border-color: hsl(200, 1%, 34%);
 }
 
-.wrong, .wrong-enter-done, .wrong-exit-active, .wrong-exit-done {
+.wrong, .wrong-exit-active, .wrong-exit-done {
     border: none;
     background-color: hsl(240, 2%, 23%);
 }
 
-.wrong-location, .wrong-location-enter-done, .wrong-location-exit-active, .wrong-location-exit-done {
+.wrong-location, .wrong-location-exit-active, .wrong-location-exit-done {
     border: none;
     background-color: hsl(49, 51%, 47%);
 }
 
-.correct, .correct-enter-done, .correct-exit-active, .correct-exit-done {
+.correct, .correct-exit-active, .correct-exit-done {
     border: none;
     background-color: hsl(115, 29%, 43%);
 }
